@@ -1,0 +1,10 @@
+.form-box
+  %form{ name: 'signup', ng: { submit: 'submit()' } }
+    .form-group
+      %input.form-control{ type: 'email', placeholder: 'Email', ng: { model: 'user.email' } }
+    .form-group
+      %input.form-control{ type: 'password', placeholder: 'Password', ng: { model: 'user.password' } }
+    .form-group
+      %input.form-control{ type: 'password', placeholder: 'Password confirmation', ng: { model: 'user.password_confirmation' } }
+    .form-group
+      %input.btn.btn-default{ type: 'submit', value: 'Sign Up' }

@@ -1,0 +1,25 @@
+{
+  "name": "how_many",
+  "homepage": "https://github.com/ironbrains/How-Many",
+  "authors": [
+    "fatbulat <fatbulat5@gmail.com>"
+  ],
+  "description": "Personal Finances",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.3",
+    "bootstrap-sass": "bootstrap-sass-official#^3.3.6",
+    "angular-route": "^1.5.3",
+    "ng-rails-csrf": "^0.1.0",
+    "angular-resource": "^1.5.3"
+  }
+}

@@ -31,5 +31,10 @@ module HowMany
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.before_initialize do |_app|
+      Sprockets::Engines #force autoloading
+      Sprockets.register_engine '.haml', Tilt::HamlTemplate
+    end
   end
 end
