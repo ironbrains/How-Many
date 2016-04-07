@@ -18,3 +18,5 @@
 /config/secrets.yml
 
 /bower_components
+
+/.byebug_history

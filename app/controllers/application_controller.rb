@@ -16,10 +16,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def jwt_token(user)
-    JsonWebToken.encode('user' => user.email)
-  end
-
   # JWT's are stored in the Authorization header using this format:
   def claims
     (auth_header = request.headers['Authorization']) &&
