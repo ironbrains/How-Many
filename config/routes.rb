@@ -6,9 +6,9 @@ Rails.application.routes.draw do
     devise_for :users, { 
       singular: :user,
       controllers: {
-        passwords: 'devise/passwords',
-        registrations: 'devise/registrations',
-        sessions: 'devise/sessions'
+        # passwords: 'devise/passwords',
+        # registrations: 'devise/registrations',
+        # sessions: 'devise/sessions'
       }
     }
   end

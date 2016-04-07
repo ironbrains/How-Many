@@ -7,4 +7,5 @@
   'ngRoute'
   'ng-rails-csrf'
   'ngResource'
+  'ngStorage'
 ]
