@@ -11,6 +11,8 @@ Rails.application.routes.draw do
         # sessions: 'devise/sessions'
       }
     }
+
+    resources :users, only: [:index, :show]
   end
 
   # You can have the root of your site routed with "root"
