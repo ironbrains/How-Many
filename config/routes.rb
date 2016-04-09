@@ -7,12 +7,12 @@ Rails.application.routes.draw do
       singular: :user,
       controllers: {
         # passwords: 'devise/passwords',
-        # registrations: 'devise/registrations',
+        registrations: 'api/users'
         # sessions: 'devise/sessions'
       }
     }
 
-    resources :users, only: [:index, :show]
+    resources :users, only: [:index, :show, :create, :destroy]
   end
 
   # You can have the root of your site routed with "root"
