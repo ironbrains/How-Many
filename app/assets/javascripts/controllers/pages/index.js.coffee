@@ -1,9 +1,13 @@
 @app.controller 'PagesIndexCtrl', [
-  '$scope', '$http'
-  ($scope, $http) ->
+  '$scope', '$http', '$location', 'AuthFactory'
+  ($scope, $http, $location, AuthFactory) ->
+    if AuthFactory.isSignedIn()
+      $location.path('/profile')
+
+    $scope.$on 'auth:login', () ->
+      $location.path('/profile')
     $scope.header = 'Index Page'
     $scope.getUsers = () ->
-      console.log 'Getting users'
       $http.get('/api/users/').then(
         (response) ->
           $scope.users = response.data

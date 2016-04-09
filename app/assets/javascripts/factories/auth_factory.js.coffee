@@ -1,8 +1,11 @@
 @app.factory 'AuthFactory', [
-  '$http', '$localStorage'
-  ($http, $localStorage) ->
-    current_user: () ->
+  '$rootScope', '$http'
+  ($rootScope, $http) ->
+    current_user: ->
       @_current_user
+
+    isSignedIn: ->
+      !!window.localStorage.auth_token
 
     signUp: (user) ->
       $http.post(
@@ -11,11 +14,9 @@
         { dataType: 'json' }
       ).then(
         (response) =>
-          window.localStorage.auth_token = response.data.auth_token
-          @_current_user = response.data.current_user
-          true
-        (data) =>
-          false
+          @_successAuthCallback(response)
+        (response) =>
+          @_errorAuthCallback(response)
       )
 
     login: (user) ->
@@ -25,13 +26,21 @@
         { dataType: 'json' }
       ).then(
         (response) =>
-          window.localStorage.auth_token = response.data.auth_token
-          @_current_user = response.data.current_user
-          true
-        (data) =>
-          false
+          @_successAuthCallback(response)
+        (response) =>
+          @_errorAuthCallback(response)
       )
 
     logout: () ->
-      window.localStorage.auth_token = null
+      @_errorAuthCallback()
+
+    _successAuthCallback: (response) ->
+      window.localStorage.auth_token = response.data.auth_token
+      @_current_user = response.data.current_user
+      $rootScope.$emit 'auth:login'
+
+    _errorAuthCallback: (response = null) ->
+      window.localStorage.auth_token = ''
+      @_current_user = null
+      $rootScope.$emit 'auth:logout'
 ]

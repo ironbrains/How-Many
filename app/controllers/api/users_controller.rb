@@ -1,5 +1,6 @@
 class Api::UsersController < Api::ApplicationController
   before_filter :authenticate_user_from_token!, except: [:create]
+  before_filter :find_user, only: [:show]
 
   def index
     @users = User.all
@@ -7,6 +8,7 @@ class Api::UsersController < Api::ApplicationController
   end
 
   def show
+    render json: @user
   end
 
   def create
@@ -25,5 +27,13 @@ class Api::UsersController < Api::ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
+  end
+
+  def find_user
+    if params[:id] == 'me'
+      @user = @current_user
+    else
+      @user = User.find(params[:id])
+    end
   end
 end
