@@ -4,8 +4,8 @@
   scope: {}
   replace: true
   controller: [
-    '$scope'
-    ($scope) ->
+    '$scope', 'AuthFactory'
+    ($scope, AuthFactory) ->
       $scope.submit = ->
-        console.log $scope.user
+        AuthFactory.login($scope.user)
   ]

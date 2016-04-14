@@ -4,12 +4,8 @@
   scope: {}
   replace: true
   controller: [
-    '$scope', 'UserFactory'
-    ($scope, UserFactory) ->
+    '$scope', 'AuthFactory'
+    ($scope, AuthFactory) ->
       $scope.submit = ->
-        UserFactory.create({ user: $scope.user }).$promise.then(
-          (data) ->
-            console.log data
-        )
-        console.log $scope.user
+        AuthFactory.signUp($scope.user)
   ]
