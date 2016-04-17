@@ -3,15 +3,16 @@ class Api::SessionsController < Devise::SessionsController
   respond_to :json
 
   def create
-    user = User.find_for_database_authentication(email: user_params[:email])
-    if user && user.valid_password?(user_params[:password])
-      render json: { auth_token: user.auth_token, current_user: user }
+    # byebug
+    @user = User.find_for_database_authentication(email: user_params[:email])
+    if @user && @user.valid_password?(user_params[:password])
+      render json: { auth_token: @user.auth_token, current_user: @user }
     else
       invalid_login_attempt
     end
   end
 
-  private
+  protected
 
   def user_params
     params.require(:user).permit(:email, :password)
