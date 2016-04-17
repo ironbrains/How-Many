@@ -9,18 +9,14 @@ class ApplicationController < ActionController::Base
   protected
 
   def authenticate_user_from_token!
-    if claims && (user = User.find_by(email: claims[0]['user']))
-      @current_user = user
-    else
+    unless @current_user = User.find_by_auth_token(auth_token)
       invalid_authentication
     end
   end
 
   # JWT's are stored in the Authorization header using this format:
-  def claims
-    (auth_header = request.headers['Authorization']) &&
-    (token = auth_header.split(' ').last) &&
-    JsonWebToken.decode(token)
+  def auth_token
+    request.headers['Authorization']
   rescue
     nil
   end
