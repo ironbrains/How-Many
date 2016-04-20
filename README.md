@@ -1,6 +1,8 @@
 How Many
 ========
 
+
+[![Build Status](https://travis-ci.org/ironbrains/How-Many.svg)](https://travis-ci.org/ironbrains/How-Many)
 [![Code Climate](https://codeclimate.com/github/ironbrains/How-Many/badges/gpa.svg)](https://codeclimate.com/github/ironbrains/How-Many)
 
 Your Personal Finance
