@@ -1,0 +1,21 @@
+language: ruby
+sudo: false
+rvm:
+  - 2.2.4
+  - 2.3.1
+bundler_args: --without production
+addons:
+  postgresql: '9.5'
+before_install:
+  - gem update bundler
+before_script:
+  - cp config/secrets.example.yml config/secrets.yml
+  - cp config/database.travis.yml config/database.yml
+  - bundle exec rake db:create db:migrate
+script:
+  - bundle exec rspec
+branches:
+  only:
+    - master
+notifications:
+email: false
