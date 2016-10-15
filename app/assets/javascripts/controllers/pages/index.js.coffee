@@ -1,9 +1,6 @@
 @app.controller 'PagesIndexCtrl', [
-  '$scope', '$http', '$location', 'AuthFactory'
-  ($scope, $http, $location, AuthFactory) ->
-    if AuthFactory.isSignedIn()
-      $location.path('/profile')
-
+  '$scope', '$http', '$location'
+  ($scope, $http, $location) ->
     $scope.$on 'auth:login', () ->
       $location.path('/profile')
     $scope.header = 'Index Page'

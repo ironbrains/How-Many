@@ -1,6 +1,6 @@
 @app.controller 'ProfileCtrl', [
   '$scope', '$location', 'AuthFactory'
   ($scope, $location, AuthFactory) ->
-    if !AuthFactory.isSignedIn()
-      $location.path('/')
+    $scope.user = AuthFactory.current_user()
+    console.log AuthFactory
 ]
