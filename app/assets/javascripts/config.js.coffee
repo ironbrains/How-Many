@@ -3,16 +3,15 @@
   ($httpProvider) ->
     $httpProvider.defaults.withCredentials = true
     $httpProvider.interceptors.push [
-      '$q', '$location', '$localStorage'
-      ($q, $location, $localStorage) ->
+      '$q', 'AuthCallbacks'
+      ($q, AuthCallbacks) ->
         request: (config) ->
-          config.headers = config.headers or {}
+          config.headers ||= {}
           if window.localStorage.auth_token
             config.headers.Authorization = 'Bearer ' + window.localStorage.auth_token
           config
         responseError: (response) ->
-          if response.status == 401 or response.status == 403
-            $location.path '/signin'
+          AuthCallbacks.error() if response.status == 401
           $q.reject response
     ]
 ]

@@ -8,7 +8,7 @@ class Api::UsersController < Api::ApplicationController
   end
 
   def show
-    render json: @user
+    render json: @user, serializer: Posts::ShowSerializer.new
   end
 
   def create
@@ -20,6 +20,9 @@ class Api::UsersController < Api::ApplicationController
     end
   end
 
+  def update
+  end
+
   def destroy
   end
 
@@ -27,13 +30,5 @@ class Api::UsersController < Api::ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
-  end
-
-  def find_user
-    if params[:id] == 'me'
-      @user = @current_user
-    else
-      @user = User.find(params[:id])
-    end
   end
 end

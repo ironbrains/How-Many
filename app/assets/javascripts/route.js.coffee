@@ -16,13 +16,15 @@
 ]
 
 @app.run [
-  '$rootScope', '$location', 'AuthFactory'
-  ($rootScope, $location, AuthFactory) ->
+  '$rootScope', '$location', '$auth'
+  ($rootScope, $location, $auth) ->
     $rootScope.$on '$locationChangeStart', (event, next, current) ->
       loggedIn = ['/', '/login', '/registration']
       loggedOut = ['/profile']
-      if AuthFactory.isSignedIn()
-        $location.path('/profile') if loggedIn.includes $location.path()
+      if $auth.isSignedIn()
+        if loggedIn.includes $location.path()
+          event.preventDefault()
+          $location.path('/profile')
       else
         $location.path('/') if loggedOut.includes $location.path()
 ]
