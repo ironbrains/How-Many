@@ -4,7 +4,7 @@
   ($location) ->
     success: (response) ->
       window.localStorage.auth_token = response.data.auth_token
-      window.localStorage.current_user = response.data.current_user
+      window.localStorage.current_user = JSON.stringify response.data.current_user
       $location.path('/profile')
 
     error: (response = null) ->
@@ -18,7 +18,7 @@
   '$rootScope', '$http', 'User', 'AuthCallbacks'
   ($rootScope, $http, User, AuthCallbacks) ->
     current_user: ->
-      window.localStorage.current_user
+      JSON.parse window.localStorage.current_user
 
     isSignedIn: ->
       !!window.localStorage.auth_token
@@ -29,10 +29,8 @@
         { user: user }
         { dataType: 'json' }
       ).then(
-        (response) ->
-          AuthCallbacks.success response
-        (response) ->
-          AuthCallbacks.error response
+        AuthCallbacks.success
+        AuthCallbacks.error
       )
 
     login: (user) ->
@@ -41,10 +39,8 @@
         { user: user }
         { dataType: 'json' }
       ).then(
-        (response) ->
-          AuthCallbacks.success response
-        (response) ->
-          AuthCallbacks.error response
+        AuthCallbacks.success
+        AuthCallbacks.error
       )
 
     logout: () ->
