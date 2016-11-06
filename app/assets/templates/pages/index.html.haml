@@ -1,15 +1,7 @@
-%h1 {{header}}
-.col-md-8
-  .row
-    %button.btn.btn-default{ ng: { click: 'getUsers()' } } Get users list
-  .row
-    %ul.list-group
-      %li.list-group-item{ ng: { repeat: 'user in users' } } {{user.email}}
-.col-md-4
-  %sign-in
-  .horizontal.divider Or
-
-  %sign-up
-  .horizontal.divider Or
-
-  %sign-out
+.row#landing
+  .col-md-8
+    %h1 Your Personal Finance
+  .col-md-4
+    %sign-in
+    .horizontal.divider Or
+    %sign-up
