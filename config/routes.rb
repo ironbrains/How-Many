@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :accounts
   end
 
+  get '*path' => 'welcome#index'
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

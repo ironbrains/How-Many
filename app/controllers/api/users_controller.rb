@@ -4,11 +4,11 @@ class Api::UsersController < Api::ApplicationController
 
   def index
     @users = User.all
-    render json: [current_user]
+    render json: @users
   end
 
   def show
-    render json: @user, serializer: Posts::ShowSerializer.new
+    render json: @user, serializer: Posts::ShowSerializer
   end
 
   def create
