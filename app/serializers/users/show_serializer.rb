@@ -1,4 +1,4 @@
-module Posts
+module Users
   class ShowSerializer < ActiveModel::Serializer
     attributes :id, :email
 

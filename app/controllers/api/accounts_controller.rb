@@ -1,4 +1,4 @@
-class Api::AccountsController < ApplicationController
+class Api::AccountsController < Api::ApplicationController
   def index
   end
 

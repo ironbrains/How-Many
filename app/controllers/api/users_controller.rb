@@ -8,7 +8,7 @@ class Api::UsersController < Api::ApplicationController
   end
 
   def show
-    render json: @user, serializer: Posts::ShowSerializer
+    render json: @user, serializer: Users::ShowSerializer
   end
 
   def create
