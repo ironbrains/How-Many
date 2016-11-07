@@ -1,0 +1,23 @@
+%h1.page-header
+  Dashboard
+  %small My Finances
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title
+          Accounts
+          %span.text-right.btn.btn-xs.btn-default New Account
+      .panel-body
+        %p total: {{dashboard.total}}
+        .list-group{ ng: { repeat: 'account in dashboard.accounts' } }
+          %a.list-group-item
+            %h3.list-group-item-heading.text-center {{account.name}}
+            .list-group-item-text
+              .row
+                .col-xs-2.text-right
+                  %span Balance
+                .col-xs-4
+                  %span {{account.balance}}
+                .col-xs-6.text-right.text-muted
+                  {{account.updated_at}}

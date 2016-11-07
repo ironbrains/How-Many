@@ -12,8 +12,9 @@ Rails.application.routes.draw do
       }
     }
 
-    resources :users, only: [:index, :show, :create, :destroy]
+    resources :users,      only: [:index, :show, :create, :destroy]
     resources :accounts
+    resources :dashboards, only: [:index]
   end
 
   get '*path' => 'welcome#index'
