@@ -16,9 +16,10 @@
 ]
 
 @app.run [
-  '$rootScope', '$location', '$auth'
-  ($rootScope, $location, $auth) ->
+  '$rootScope', '$location', '$auth', 'MenuFactory'
+  ($rootScope, $location, $auth, MenuFactory) ->
     $rootScope.$on '$locationChangeStart', (event, next, current) ->
+      MenuFactory.calcItems $location.path()
       loggedIn = ['/', '/login', '/registration']
       loggedOut = ['/profile']
       if $auth.isSignedIn()

@@ -1,0 +1,4 @@
+%nav.navbar-right
+  %ul.nav.nav-pills
+    %li{ class: '{{item.isActive ? "active" : null}}', ng: { repeat: 'item in menu.items' } }
+      %a{ ng: { href: '{{item.link}}', click: 'item.action()' } } {{item.label}}
