@@ -1,9 +1,8 @@
 FactoryGirl.define do
   factory :account do
-    name "MyString"
-    type ""
-    user nil
-    balance ""
-    balance ""
+    name "My Account"
+    type 0
+    user
+    balance 0.00
   end
 end
