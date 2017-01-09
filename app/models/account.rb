@@ -1,5 +1,4 @@
 class Account < ActiveRecord::Base
-
   enum types: [
     :cheque,
     :savings,
@@ -10,15 +9,31 @@ class Account < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :sendings,     class_name: 'Transaction', foreign_key: 'sender_id'
-  has_many :receivements, class_name: 'Transaction', foreign_key: 'receiver_id'
+  has_many :transactions
+  has_many :incoming_transactions, class_name: 'Transaction', foreign_key: 'payee_account_id'
 
   def deposit(sum)
-    update_attribute :balance, self.balance + sum
+    transaction_params = {
+      name: 'Deposit to #{name} at {DateTime.now}',
+      status: Transaction.statuses[:done],
+      amount: sum
+    }
+    transaction do
+      increment :balance, sum
+      transactions.create transaction_params
+    end
   end
 
   def withdraw(sum)
-    new_ammount = self.balance - sum
-    update_attribute(:balance, new_ammount) if new_ammount > 0
+    new_balance = balance - sum
+    if new_balance > 0
+      transaction_params = {
+        name: 'Withdraw from #{name} at {DateTime.now}',
+        status: Transaction.statuses[:done],
+        amount: -sum
+      }
+      decrement :balance, sum
+      transactions.create transaction_params
+    end
   end
 end
