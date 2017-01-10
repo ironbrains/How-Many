@@ -7,9 +7,9 @@
       .panel-heading
         %h3.panel-title
           Accounts
-          %span.text-right.btn.btn-xs.btn-default New Account
+          %span.text-right.btn.btn-xs.btn-default{ ng: { click: 'shown = true' } } New Account
       .panel-body
-        %p total: {{dashboard.total}}
+        %p{ ng: { if: 'dashboard.total != null' } } total: {{dashboard.total}}
         .list-group{ ng: { repeat: 'account in dashboard.accounts' } }
           %a.list-group-item
             %h3.list-group-item-heading.text-center {{account.name}}
@@ -21,3 +21,5 @@
                   %span {{account.balance}}
                 .col-xs-6.text-right.text-muted
                   {{account.updated_at}}
+
+%new-account-modal{ shown: 'shown', 'add-to-list' => 'addToList(newAccount)' }
