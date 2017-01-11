@@ -12,7 +12,9 @@
         %p{ ng: { if: 'dashboard.total != null' } } total: {{dashboard.total}}
         .list-group{ ng: { repeat: 'account in dashboard.accounts' } }
           %a.list-group-item
-            %h3.list-group-item-heading.text-center {{account.name}}
+            %h3.list-group-item-heading.account-header
+              {{account.name}}
+              %span.btn.btn-xs.btn-default{ ng: { click: '$parent.currentAccount = account' } } Edit
             .list-group-item-text
               .row
                 .col-xs-2.text-right
@@ -23,3 +25,4 @@
                   {{account.updated_at}}
 
 %new-account-modal{ shown: 'shown', 'add-to-list' => 'addToList(newAccount)' }
+%edit-account-modal{ account: 'currentAccount' }

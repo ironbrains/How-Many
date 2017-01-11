@@ -1,4 +1,6 @@
 class Api::AccountsController < Api::ApplicationController
+  before_filter :authenticate_user_from_token!
+
   def index
   end
 
@@ -15,6 +17,12 @@ class Api::AccountsController < Api::ApplicationController
   end
 
   def update
+    @account = current_user.accounts.find params[:id]
+    if @account.update account_params
+      render status: :created, json: @account
+    else
+      render status: :bad_request, nothing: true
+    end
   end
 
   def destroy

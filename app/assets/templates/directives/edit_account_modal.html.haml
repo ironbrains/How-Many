@@ -1,0 +1,16 @@
+.modal{ role: 'dialog', tabindex: '-1', ng: { class: 'className', style: 'style' } }
+  .modal-dialog{ role: 'document' }
+    .modal-content
+      .modal-header
+        %button.close{ type: 'button', aria: { label: 'Close' }, data: { dismiss: 'modal' }, ng: { click: 'close()' } }
+          %span{ aria: { hidden: 'true' } } ×
+        %h4.modal-title Edit account
+      .modal-body
+        %form.form-horizontal
+          .form-group
+            %label.col-xs-2.control-label Name
+            .col-xs-8
+              %input.form-control{ type: 'text', ng: { model: 'tmpAccount.name' } }
+      .modal-footer
+        %button.btn.btn-default{ type: 'button', data: { dismiss: 'modal' }, ng: { click: 'close()' } } Close
+        %button.btn.btn-primary{ type: 'button', ng: { click: 'save()' } } Save

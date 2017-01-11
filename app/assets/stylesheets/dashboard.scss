@@ -1,0 +1,10 @@
+.account-header {
+    span {
+        display: none;
+    }
+    &:hover {
+        span {
+            display: inline;
+        }
+    }
+}
