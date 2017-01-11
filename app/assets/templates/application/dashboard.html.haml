@@ -15,6 +15,7 @@
             %h3.list-group-item-heading.account-header
               {{account.name}}
               %span.btn.btn-xs.btn-default{ ng: { click: '$parent.currentAccount = account' } } Edit
+              %span.btn.btn-xs.btn-default{ ng: { click: '$parent.removeAccount(account)' } } Remove
             .list-group-item-text
               .row
                 .col-xs-2.text-right

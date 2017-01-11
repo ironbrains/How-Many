@@ -33,4 +33,18 @@ RSpec.describe Account, type: :model do
         .and change(Transaction, :count)
     end
   end
+
+  describe '#destroy' do
+    context 'when balance is zero' do
+      let!(:account) { FactoryGirl.create :account, balance: 0 }
+
+      it { expect { account.destroy }.to change(Account, :count).by(-1) }
+    end
+
+    context 'when balance is not zero' do
+      let!(:account) { FactoryGirl.create :account, balance: 100 }
+
+      it { expect { account.destroy }.not_to change(Account, :count) }
+    end
+  end
 end

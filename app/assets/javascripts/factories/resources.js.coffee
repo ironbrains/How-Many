@@ -11,6 +11,7 @@ AccountFactory = ($resource) ->
     show:   { method: 'GET' }
     create: { method: 'POST' }
     update: { method: 'PUT' }
+    destroy: { method: 'DELETE' }
 
 
 DashboardFactory = ($resource) ->

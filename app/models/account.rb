@@ -12,6 +12,8 @@ class Account < ActiveRecord::Base
   has_many :transactions
   has_many :incoming_transactions, class_name: 'Transaction', foreign_key: 'payee_account_id'
 
+  before_destroy { balance.zero? }
+
   def deposit(sum)
     transaction_params = {
       name: 'Deposit to #{name} at {DateTime.now}',
